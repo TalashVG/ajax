@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form-content" action="index.html" method="post">
+      <label for="name">Your name</label>
+      <input type="text" id="name" value="">
+    </form>
+    <button id='btn'>Write your name in file</button>
+    <div id="response"></div>
+</body>
+<script src="./jquery-3.5.1.min.js"></script>
+<script>
+    $('#btn').click( function (event) {
+         event.preventDefault();
+
+         var name = $("#name").val();
+         console.log(name);
+
+         $.ajax({
+             type: "post",
+             url: '/user',
+             data:{data: name},
+             rawHeaders: {
+                 origin: "asd"
+            },
+            success: function (response) {
+                $('#response').html(response);
+            },
+            error: function (response) {
+                console.log("error, please check connection")
+            }
+        });
+     });
+    </script>
+</html>
